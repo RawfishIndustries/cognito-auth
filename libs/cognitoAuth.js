@@ -24,7 +24,7 @@ function customError(code, title, message) {
     })
 }
 
-function _init (region, identityPoolId, userPoolId, clientId) {
+function _initConfig (region, identityPoolId, userPoolId, clientId) {
     awsConfig.initAWS(region, identityPoolId, userPoolId, clientId)
 }
 
@@ -312,7 +312,7 @@ function _logOut(email) {
     })
 }
 
-exports.init = _init
+exports.init = _initConfig
 exports.getVerifyMiddleware = _getVerifyMiddleware
 exports.signIn = _signIn
 exports.signUp = _signUp
