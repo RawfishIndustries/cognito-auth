@@ -4,7 +4,7 @@ const jwkToPem = require('jwk-to-pem')
 const axios = require('axios')
 const jwt = require('jsonwebtoken')
 
-const logger = require('../../lib/logger')
+const logger = require('./logger')
 const { CognitoRefreshToken } = require('amazon-cognito-identity-js')
 
 const TOKEN_USE_ACCESS = 'access'
