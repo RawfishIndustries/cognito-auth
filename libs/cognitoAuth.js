@@ -25,7 +25,7 @@ function customError(code, title, message) {
 }
 
 function _initConfig (region, identityPoolId, userPoolId, clientId) {
-    awsConfig.initAWS(region, identityPoolId, userPoolId, clientId)
+    awsConfig(region, identityPoolId, userPoolId, clientId)
 }
 
 // Get the middleware function that will verify the incoming request
