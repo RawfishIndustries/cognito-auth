@@ -1,4 +1,4 @@
-const awsConfig = require('./awsConfig')
+const AWSConfig = require('./awsConfig')
 
 const jwkToPem = require('jwk-to-pem')
 const axios = require('axios')
@@ -15,6 +15,8 @@ const ALLOWED_TOKEN_USES = [TOKEN_USE_ACCESS, TOKEN_USE_ID]
 
 const JSONAPIError = require('jsonapi-serializer').Error
 
+let awsConfig
+
 // Set custum auth error in jsonapi format
 function customError(code, title, message) {
     return new JSONAPIError({
@@ -25,7 +27,7 @@ function customError(code, title, message) {
 }
 
 function _initConfig (region, identityPoolId, userPoolId, clientId) {
-    awsConfig(region, identityPoolId, userPoolId, clientId)
+    awsConfig = new AWSConfig(region, identityPoolId, userPoolId, clientId)
 }
 
 // Get the middleware function that will verify the incoming request
