@@ -1,0 +1,26 @@
+{
+  "name": "cognito-auth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grottoluca/cognito-auth.git"
+  },
+  "author": "Luca Grotto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grottoluca/cognito-auth/issues"
+  },
+  "homepage": "https://github.com/grottoluca/cognito-auth#readme",
+  "dependencies": {
+    "amazon-cognito-identity-js": "^5.2.10",
+    "aws-sdk": "^2.1229.0",
+    "axios": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwk-to-pem": "^2.0.5"
+  }
+}
