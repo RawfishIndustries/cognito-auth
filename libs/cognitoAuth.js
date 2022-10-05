@@ -196,7 +196,6 @@ function _signIn(email, password) {
 
 function _signUp(email, password, agent = 'none') {
     return new Promise((resolve) => {
-        awsConfig.initAWS ()
         awsConfig.setCognitoAttributeList(email,agent)
         awsConfig.getUserPool().signUp(email, password, awsConfig.getCognitoAttributeList(), null, function(err, result){
             if (err) {
@@ -215,7 +214,6 @@ function _signUp(email, password, agent = 'none') {
 
 function _changePassword(oldPassword, newPassword) {
     return new Promise((resolve) => {
-        awsConfig.initAWS ()
         const authUser = awsConfig.getUserPool().getCurrentUser()
         if(!authUser) {
             return resolve({ statusCode: 422, response: 'User is not authenticated' })
@@ -236,7 +234,6 @@ function _changePassword(oldPassword, newPassword) {
 
 function _requestResetPassword(email) {
     return new Promise((resolve) => {
-        awsConfig.initAWS ()
         const cognitoUser = awsConfig.getCognitoUser(email)
         if(!cognitoUser) {
             return resolve({ statusCode: 422, response: 'User not exist' })
@@ -256,7 +253,6 @@ function _requestResetPassword(email) {
 
 function _resetPassword(email, confirmation_code, newPassword) {
     return new Promise((resolve) => {
-        awsConfig.initAWS ()
         const cognitoUser = awsConfig.getCognitoUser(email)
         if(!cognitoUser) {
             return resolve({ statusCode: 422, response: 'User not exist' })
@@ -286,7 +282,6 @@ function _verify(email, code) {
 
 function _refresh(refreshToken, email) {
     return new Promise((resolve) => {
-        awsConfig.initAWS ()
         const token = new CognitoRefreshToken({ RefreshToken: refreshToken})
         awsConfig.getCognitoUser(email).refreshSession(token, function(err, result){
             if (err) {
@@ -304,7 +299,6 @@ function _refresh(refreshToken, email) {
 
 function _logOut(email) {
     return new Promise((resolve) => {
-        awsConfig.initAWS ()
         awsConfig.getCognitoUser(email).signOut(function(err, result){
             if (err) {
                 return resolve({ statusCode: 422, response: err })
