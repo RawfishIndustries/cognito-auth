@@ -12,7 +12,6 @@ const TOKEN_USE_ID = 'id'
 
 const MAX_TOKEN_AGE = 60 * 60 // 3600 seconds
 const ALLOWED_TOKEN_USES = [TOKEN_USE_ACCESS, TOKEN_USE_ID]
-const ISSUER = awsConfig.getIssuer()
 
 const JSONAPIError = require('jsonapi-serializer').Error
 
@@ -23,6 +22,10 @@ function customError(code, title, message) {
         title: title,
         detail: message
     })
+}
+
+function _init (region, identityPoolId, userPoolId, clientId) {
+    awsConfig.initAWS(region, identityPoolId, userPoolId, clientId)
 }
 
 // Get the middleware function that will verify the incoming request
@@ -43,7 +46,7 @@ function _init () {
     return new Promise((resolve, reject) => {
         const config = {
             method: 'GET',
-            url: `${ISSUER}/.well-known/jwks.json`,
+            url: `${awsConfig.getIssuer()}/.well-known/jwks.json`,
             json: true
         }
 
@@ -132,7 +135,7 @@ function _verifyProm (pems, auth) {
         // Now verify the JWT signature matches the relevant key
         jwt.verify(token, pems[decodedNotVerified.header.kid], {
             algorithms: ['RS256'],
-            issuer: ISSUER,
+            issuer: awsConfig.getIssuer(),
             maxAge: MAX_TOKEN_AGE
         },
         function (err, decodedAndVerified) {
@@ -309,6 +312,7 @@ function _logOut(email) {
     })
 }
 
+exports.init = _init
 exports.getVerifyMiddleware = _getVerifyMiddleware
 exports.signIn = _signIn
 exports.signUp = _signUp

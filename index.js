@@ -1,8 +1,7 @@
-const AWS = require('./libs/awsConfig')
-const { getVerifyMiddleware, signUp, signIn, logOut, refresh, verify, changePassword, requestResetPassword, resetPassword } = require('./libs/cognitoAuth')
+const { init, getVerifyMiddleware, signUp, signIn, logOut, refresh, verify, changePassword, requestResetPassword, resetPassword } = require('./libs/cognitoAuth')
 
 module.exports = {
-    init: AWS.initAWS,
+    init: init,
     getVerifyMiddleware,
     signUp,
     signIn,
