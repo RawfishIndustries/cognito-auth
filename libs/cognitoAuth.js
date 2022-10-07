@@ -88,13 +88,13 @@ function _verifyMiddleWare (pemsDownloadProm, req, res, next) {
                 req.user.scope = decoded.scope.split(' ')
                 req.user.username = decoded.username
                 req.user.email = decoded.username 
-                req.user.groups = decoded['cognito:groups']
+                req.user.groups = decoded['cognito:groups'] ? decoded['cognito:groups'] : []
             }
             if (decoded.token_use === TOKEN_USE_ID) {
                 // id token specific fields
                 req.user.email = decoded.email
                 req.user.username = decoded['cognito:username']
-                req.user.groups = decoded['cognito:groups']
+                req.user.groups = decoded['cognito:groups'] ? decoded['cognito:groups'] : []
             }
             next()
         })
