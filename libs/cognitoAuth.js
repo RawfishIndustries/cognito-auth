@@ -214,6 +214,17 @@ function _signUp(email, password, agent = 'none') {
     })
 }
 
+function _addToGroup(username, groupName) {
+    return new Promise((resolve) => {
+        awsConfig.getUserPool().getUser(username).addGroup(groupName, (err, result) => {
+            if (err) {
+                return resolve({ statusCode: 422, response: err })
+            }
+            return resolve({ statusCode: 201, response: result })
+        })
+    })
+}
+
 function _changePassword(oldPassword, newPassword) {
     return new Promise((resolve) => {
         const authUser = awsConfig.getUserPool().getCurrentUser()
@@ -314,6 +325,7 @@ exports.init = _initConfig
 exports.getVerifyMiddleware = _getVerifyMiddleware
 exports.signIn = _signIn
 exports.signUp = _signUp
+exports.addToGroup = _addToGroup
 exports.logOut = _logOut
 exports.refresh = _refresh
 exports.verify = _verify
