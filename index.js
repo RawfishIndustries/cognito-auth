@@ -1,4 +1,4 @@
-const { init, getVerifyMiddleware, signUp, signIn, addToGroup, logOut, refresh, verify, changePassword, requestResetPassword, resetPassword } = require('./libs/cognitoAuth')
+const { init, getVerifyMiddleware, signUp, signIn, addToGroup, logOut, enableUser, disableUser, refresh, verify, changePassword, requestResetPassword, resetPassword } = require('./libs/cognitoAuth')
 
 module.exports = {
     init: init,
@@ -7,6 +7,8 @@ module.exports = {
     signIn,
     addToGroup,
     logOut,
+    enableUser,
+    disableUser,
     refresh,
     verify,
     changePassword,
