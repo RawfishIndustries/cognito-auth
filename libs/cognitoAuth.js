@@ -321,12 +321,38 @@ function _logOut(email) {
     })
 }
 
+function _disable(username) {
+    return new Promise((resolve) => {
+        awsConfig.disableUser(username)
+            .then((result) => {
+                return resolve({ statusCode: 200, response: result })
+            })
+            .catch((err) => {
+                return resolve({ statusCode: 422, response: err })
+            })
+    })
+}
+
+function _enable(username) {
+    return new Promise((resolve) => {
+        awsConfig.enableUser(username)
+            .then((result) => {
+                return resolve({ statusCode: 200, response: result })
+            })
+            .catch((err) => {
+                return resolve({ statusCode: 422, response: err })
+            })
+    })
+}
+
 exports.init = _initConfig
 exports.getVerifyMiddleware = _getVerifyMiddleware
 exports.signIn = _signIn
 exports.signUp = _signUp
 exports.addToGroup = _addToGroup
 exports.logOut = _logOut
+exports.disableUser = _disable
+exports.enableUser = _enable
 exports.refresh = _refresh
 exports.verify = _verify
 exports.changePassword = _changePassword

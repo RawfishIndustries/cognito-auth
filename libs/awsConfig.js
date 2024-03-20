@@ -15,6 +15,7 @@ class AWSConfig {
             ClientId: clientId,
         }
         this.issuer = `https://cognito-idp.${region}.amazonaws.com/${userPoolId}`
+        this.cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider
     }
 
     attributes(key, value) { 
@@ -62,6 +63,14 @@ class AWSConfig {
 
     getClientId() {
         return this.poolData.ClientId
+    }
+
+    disableUser(cognitoSub) {
+        return this.cognitoIdentityServiceProvider.adminDisableUser({ UserPoolId: this.poolData.UserPoolId, Username: cognitoSub }).promise()
+    }
+
+    enableUser(cognitoSub) {
+        return this.cognitoIdentityServiceProvider.adminEnableUser({ UserPoolId: this.poolData.UserPoolId, Username: cognitoSub }).promise()
     }
 
     decodeJWTToken(token) {
